@@ -2,21 +2,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { Movie } from "./Models";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+// import { useLocalStorage } from "../hooks/useLocalStorage";
+import { Dispatch, SetStateAction } from "react";
 
 type MovieCardProps = {
   movie: Movie;
+  setMovieList: Dispatch<SetStateAction<Movie[]>>;
 };
 
 const MovieCard = (props: MovieCardProps) => {
-  const [liked, setLiked] = useLocalStorage(
-    props.movie.original_title,
-    "false"
-  );
-  //   const [liked, setLiked] = useState<boolean>();
+  // const [likedMovies, setLikedMovies] = useLocalStorage(
+  //   props.movie.original_title,
+  //   "true"
+  // );
 
   const handleClick = () => {
-    setLiked((liked: string) => (liked === "true" ? "false" : "true"));
+    console.log("you have liked", props.movie.original_title);
+
+    // setLiked((liked: string) => (liked === "true" ? "false" : "true"));
+    props.setMovieList((prev) =>
+      prev.map((movielist) =>
+        movielist.original_title === props.movie.original_title
+          ? { ...movielist, liked: true }
+          : movielist
+      )
+    );
   };
 
   return (
@@ -32,7 +42,7 @@ const MovieCard = (props: MovieCardProps) => {
           <h2 className="card-title">{props.movie.original_title}</h2>
         </div>
         <div className="card-actions justify-end">
-          {liked == "false" ? (
+          {props.movie.liked === false ? (
             <FontAwesomeIcon
               icon={faHeart}
               size="xl"
