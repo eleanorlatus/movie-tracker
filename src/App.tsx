@@ -1,21 +1,27 @@
+import { useEffect, useState } from "react";
+import Header from "./components/Header";
+import MovieGrid from "./components/MovieGrid";
+import { Movie } from "./components/Models";
+
 function App() {
+  const [movieList, setMovieList] = useState<Movie[]>([]);
+
+  useEffect(() => {
+    const getMovieData = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=c6888832bf05569c48c9dc5bf36c6fd7`
+      );
+      const data = await res.json();
+      setMovieList(data.results);
+    };
+    getMovieData();
+  }, []);
+
+  // console.log(movieList);
   return (
     <>
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <img
-            src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
+      <Header />
+      <MovieGrid movies={movieList} />
     </>
   );
 }
