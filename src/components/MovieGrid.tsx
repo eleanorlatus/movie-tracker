@@ -11,7 +11,6 @@ const MovieGrid = ({ movieList, setMovieList }: MovieGridProps) => {
   const [sortBy, setSortBy] = useState<string>("");
 
   let sortedMovies = [...movieList];
-  console.log(sortedMovies);
 
   if (sortBy === "Liked") {
     sortedMovies = [...movieList].sort(
@@ -38,8 +37,10 @@ const MovieGrid = ({ movieList, setMovieList }: MovieGridProps) => {
         <select
           className="select select-bordered"
           onChange={(event) => setSortBy(event.target.value)}
-          // value={sortBy}
         >
+          <option disabled selected>
+            Sort by
+          </option>
           <option>Popularity</option>
           <option>A-Z</option>
           <option>Liked</option>

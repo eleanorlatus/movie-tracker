@@ -48,7 +48,7 @@ const MovieCard = ({ movie, setMovieList }: MovieCardProps) => {
           <h2 className="card-title">{movie.original_title}</h2>
         </div>
         <div className="card-actions justify-between">
-          <span className="score">{movie.vote_average}</span>
+          <span className="score">{movie.vote_average.toFixed(1)}</span>
           {!movie.liked ? (
             <FontAwesomeIcon
               icon={faHeart}
