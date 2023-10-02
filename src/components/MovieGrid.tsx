@@ -11,6 +11,7 @@ const MovieGrid = ({ movieList, setMovieList }: MovieGridProps) => {
   const [sortBy, setSortBy] = useState<string>("");
 
   let sortedMovies = [...movieList];
+  console.log(sortedMovies);
 
   if (sortBy === "Liked") {
     sortedMovies = [...movieList].sort(

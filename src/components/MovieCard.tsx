@@ -14,14 +14,25 @@ const MovieCard = ({ movie, setMovieList }: MovieCardProps) => {
   // TODO: add liked movies to localstorage
 
   const handleClick = () => {
-    console.log("you have liked", movie.original_title);
-    setMovieList((prev) =>
-      prev.map((movielist) =>
-        movielist.original_title === movie.original_title
-          ? { ...movielist, liked: true }
-          : movielist
-      )
-    );
+    if (!movie.liked) {
+      console.log("you have liked", movie.original_title);
+      setMovieList((prev) =>
+        prev.map((movielist) =>
+          movielist.original_title === movie.original_title
+            ? { ...movielist, liked: true }
+            : movielist
+        )
+      );
+    } else {
+      console.log("you have unliked", movie.original_title);
+      setMovieList((prev) =>
+        prev.map((movielist) =>
+          movielist.original_title === movie.original_title
+            ? { ...movielist, liked: false }
+            : movielist
+        )
+      );
+    }
   };
 
   return (
@@ -36,18 +47,19 @@ const MovieCard = ({ movie, setMovieList }: MovieCardProps) => {
         <div className="card-body">
           <h2 className="card-title">{movie.original_title}</h2>
         </div>
-        <div className="card-actions justify-end">
+        <div className="card-actions justify-between">
+          <span className="score">{movie.vote_average}</span>
           {!movie.liked ? (
             <FontAwesomeIcon
               icon={faHeart}
-              size="xl"
+              size="2xl"
               className="heart-icon"
               onClick={handleClick}
             />
           ) : (
             <FontAwesomeIcon
               icon={faHeartSolid}
-              size="xl"
+              size="2xl"
               className="heart-icon heart-solid"
               onClick={handleClick}
             />
