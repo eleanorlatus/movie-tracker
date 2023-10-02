@@ -10,19 +10,14 @@ type MovieCardProps = {
   setMovieList: Dispatch<SetStateAction<Movie[]>>;
 };
 
-const MovieCard = (props: MovieCardProps) => {
-  // const [likedMovies, setLikedMovies] = useLocalStorage(
-  //   props.movie.original_title,
-  //   "true"
-  // );
+const MovieCard = ({ movie, setMovieList }: MovieCardProps) => {
+  // TODO: add liked movies to localstorage
 
   const handleClick = () => {
-    console.log("you have liked", props.movie.original_title);
-
-    // setLiked((liked: string) => (liked === "true" ? "false" : "true"));
-    props.setMovieList((prev) =>
+    console.log("you have liked", movie.original_title);
+    setMovieList((prev) =>
       prev.map((movielist) =>
-        movielist.original_title === props.movie.original_title
+        movielist.original_title === movie.original_title
           ? { ...movielist, liked: true }
           : movielist
       )
@@ -34,15 +29,15 @@ const MovieCard = (props: MovieCardProps) => {
       <div className="card w-44 bg-base-100 shadow-xl">
         <figure>
           <img
-            src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
             alt="Movie poster"
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{props.movie.original_title}</h2>
+          <h2 className="card-title">{movie.original_title}</h2>
         </div>
         <div className="card-actions justify-end">
-          {props.movie.liked === false ? (
+          {!movie.liked ? (
             <FontAwesomeIcon
               icon={faHeart}
               size="xl"

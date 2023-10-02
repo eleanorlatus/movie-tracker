@@ -12,11 +12,12 @@ function App() {
         `https://api.themoviedb.org/3/movie/top_rated?api_key=c6888832bf05569c48c9dc5bf36c6fd7`
       );
       const data = await res.json();
-      const newArr = data.results.map((movie: Movie) => ({
-        ...movie,
-        liked: false,
-      }));
-      setMovieList(newArr);
+      setMovieList(
+        data.results.map((movie: Movie) => ({
+          ...movie,
+          liked: false,
+        }))
+      );
     };
     getMovieData();
   }, []);
@@ -24,7 +25,7 @@ function App() {
   return (
     <>
       <Header />
-      <MovieGrid movies={movieList} setMovieList={setMovieList} />
+      <MovieGrid movieList={movieList} setMovieList={setMovieList} />
     </>
   );
 }
