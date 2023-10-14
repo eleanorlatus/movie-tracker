@@ -29,8 +29,8 @@ const MovieGrid = ({ movieList, setMovieList }: MovieGridProps) => {
   }
 
   return (
-    <div className="p-24">
-      <div className="form-control w-full max-w-xs">
+    <div className="px-24">
+      <div className="form-control w-full max-w-xs py-4">
         <label className="label">
           <span className="label-text">Sort By</span>
         </label>
@@ -38,15 +38,13 @@ const MovieGrid = ({ movieList, setMovieList }: MovieGridProps) => {
           className="select select-bordered"
           onChange={(event) => setSortBy(event.target.value)}
         >
-          <option disabled selected>
-            Sort by
-          </option>
+          <option disabled>Sort by</option>
           <option>Popularity</option>
           <option>A-Z</option>
           <option>Liked</option>
         </select>
       </div>
-      <div className="flex flex-row gap-4 flex-wrap justify-between">
+      <div className="flex flex-row gap-2 flex-wrap justify-around">
         {sortedMovies.map((movie: Movie) => (
           <MovieCard movie={movie} key={movie.id} setMovieList={setMovieList} />
         ))}

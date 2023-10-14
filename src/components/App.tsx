@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import Header from "./components/Header";
-import MovieGrid from "./components/MovieGrid";
-import { Movie } from "./components/Models";
+import Header from "./Header";
+import MovieGrid from "./MovieGrid";
+import { Movie } from "./Models";
+import Toolbar from "./Toolbar";
 
 function App() {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [apiRequest, setApiRequest] = useState("topRated");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     let url = "";
@@ -18,6 +20,10 @@ function App() {
     }
     getMovieData(url);
   }, [apiRequest]);
+
+  useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", theme);
+  }, [theme]);
 
   const getMovieData = async (url: string) => {
     const res = await fetch(url);
@@ -33,12 +39,11 @@ function App() {
   return (
     <>
       <Header />
-      <button className="btn" onClick={() => setApiRequest("topRated")}>
-        Top Rated
-      </button>
-      <button className="btn" onClick={() => setApiRequest("trendingThisWeek")}>
-        Trending this week
-      </button>
+      <Toolbar
+        setApiRequest={setApiRequest}
+        setTheme={setTheme}
+        theme={theme}
+      />
       <MovieGrid movieList={movieList} setMovieList={setMovieList} />
     </>
   );

@@ -28,6 +28,9 @@
   
   
 .score{
-  color: gold;
-  
+  color: #c0a311;
+}
+
+.navbar-center {
+  justify-content: center;
 }

@@ -1,11 +1,10 @@
 function Header() {
   return (
     <>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start"></div>
-        <div className="navbar-center">
-          <a className="btn btn-ghost normal-case text-xl">Movie tracker</a>
-        </div>
+      <div className="navbar navbar-center bg-base-100">
+        <a className="btn normal-case text-xl  btn-outline btn-accent">
+          Movie tracker
+        </a>
       </div>
     </>
   );

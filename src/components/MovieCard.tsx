@@ -37,7 +37,7 @@ const MovieCard = ({ movie, setMovieList }: MovieCardProps) => {
 
   return (
     <>
-      <div className="card w-44 bg-base-100 shadow-xl">
+      <div className="card w-60 bg-base-100 shadow-xl my-2">
         <figure>
           <img
             src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -48,7 +48,7 @@ const MovieCard = ({ movie, setMovieList }: MovieCardProps) => {
           <h2 className="card-title">{movie.original_title}</h2>
         </div>
         <div className="card-actions justify-between">
-          <span className="score">{movie.vote_average.toFixed(1)}</span>
+          <span className="score px-6">{movie.vote_average.toFixed(1)}</span>
           {!movie.liked ? (
             <FontAwesomeIcon
               icon={faHeart}
